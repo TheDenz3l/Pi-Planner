@@ -1,20 +1,13 @@
 {
   "name": "pi-planner",
-  "version": "1.0.0",
-  "description": "Planning extension for Pi AI assistant",
-  "main": "index.js",
-  "bin": {
-    "pi-planner": "./bin/install.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "2.0.0",
+  "description": "Planner workflow extension for Pi (questioning → implementation → summary)",
   "keywords": [
+    "pi-package",
     "pi",
     "planner",
     "extension",
-    "ai",
-    "assistant"
+    "workflow"
   ],
   "author": "TheDenz3l",
   "license": "MIT",
@@ -23,16 +16,20 @@
     "url": "https://github.com/TheDenz3l/Pi-Planner.git"
   },
   "files": [
-    "bin/",
-    "extension/",
-    "index.js",
-    "README.md"
+    "extensions/",
+    "README.md",
+    "LICENSE"
   ],
-  "engines": {
-    "node": ">=14.0.0"
+  "pi": {
+    "extensions": [
+      "./extensions/planner/index.ts"
+    ]
   },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "fs-extra": "^11.1.0"
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@sinclair/typebox": "*"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

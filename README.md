@@ -1,123 +1,71 @@
-# Pi Planner Extension
+# Pi Planner
 
-Enhanced planning and task management capabilities for Pi AI assistant.
+Planner workflow extension for Pi with a strict three-phase flow:
 
-## Installation
+1. **Planning** (questioning + clarifications)
+2. **Implementation** (execute changes)
+3. **Summary** (final recap, no further edits)
 
-Install the extension using npx:
+## Install
 
 ```bash
-npx pi-planner
+pi install npm:pi-planner
 ```
 
-This will automatically install the planner extension to your Pi configuration.
+Then run:
 
-## Features
-
-- **Task Management**: Create, list, complete, and delete tasks
-- **Project Organization**: Organize tasks into projects with milestones
-- **Planning Tools**: Break down complex tasks into actionable steps
-- **Persistent Storage**: All data is stored locally in `~/.pi/planner-data`
+```bash
+/reload
+```
 
 ## Usage
 
-Once installed, the planner extension adds the following commands to Pi:
-
-### Planning
+### Start planning
 
 ```bash
-plan "Build a web application"
+/plan Build a desktop-first landlord maintenance app
 ```
 
-Creates a structured plan for your task or project.
+### Planner commands
 
-### Task Management
+- `/plan [goal]` — start planning mode
+- `/plan execute` — force switch to implementation mode
+- `/plan status` — show planner state
+- `/plan doctor` — diagnostics (model/tools/state)
+- `/plan off` — disable planner and restore default tools
+
+## What this extension does
+
+- In **planning mode**, it enforces read-only exploration and asks structured multiple-choice clarifying questions via `planner_questionnaire`.
+- After a plan is finalized (`planner_finalize_plan`), it auto-switches to implementation mode.
+- In **implementation mode**, it enables coding tools and nudges finder-first execution.
+- After implementation, it enters **summary mode** (read-only) and produces a final recap.
+
+## Notes
+
+- This package is a **Pi package** (not an `npx` installer).
+- Install/update/remove it with Pi package commands:
 
 ```bash
-# Add a new task
-task add "Implement user authentication"
-
-# List all tasks
-task list
-
-# List pending tasks only
-task list --status pending
-
-# Complete a task
-task complete <task-id>
-
-# Delete a task
-task delete <task-id>
+pi install npm:pi-planner
+pi update
+pi remove npm:pi-planner
 ```
-
-### Project Management
-
-```bash
-# Create a new project
-project create "E-commerce Platform"
-
-# List all projects
-project list
-
-# Add a task to a project
-task add "Setup database" --project <project-id>
-```
-
-## Data Storage
-
-All planner data is stored in:
-- Tasks: `~/.pi/planner-data/tasks.json`
-- Projects: `~/.pi/planner-data/projects.json`
-
-## Configuration
-
-The extension is configured in `~/.pi/config.json`:
-
-```json
-{
-  "extensions": [
-    {
-      "name": "planner",
-      "enabled": true,
-      "path": "~/.pi/extensions/planner"
-    }
-  ]
-}
-```
-
-## Uninstallation
-
-To remove the extension:
-
-1. Remove the extension from `~/.pi/config.json`
-2. Delete the extension directory: `rm -rf ~/.pi/extensions/planner`
-3. (Optional) Delete planner data: `rm -rf ~/.pi/planner-data`
 
 ## Development
-
-### Local Development
 
 ```bash
 git clone https://github.com/TheDenz3l/Pi-Planner.git
 cd Pi-Planner
-npm install
-npm link
 ```
 
-### Testing
+Test locally without publishing:
 
 ```bash
-npm test
+pi install /absolute/path/to/Pi-Planner
+/reload
 ```
 
 ## License
 
 MIT
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For issues and feature requests, please use the [GitHub issue tracker](https://github.com/TheDenz3l/Pi-Planner/issues).
