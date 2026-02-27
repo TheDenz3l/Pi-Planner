@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheDenz3l/Pi-Planner.git"
+    "url": "git+https://github.com/TheDenz3l/Pi-Planner.git"
   },
   "files": [
     "extensions/",
